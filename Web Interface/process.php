@@ -6,6 +6,24 @@ function customhash($str) {
     return md5($str); // To help change the hashing for password saving if needed.
 }
 
+function generateProblemStatement($problemInfo) {
+	$statement = $problemInfo['problem_statement'];
+	$statement.= '<br><br><b>Constraints</b>';
+	$statement.= '<div class="well well-sm">'.$problemInfo['constraints'].'</div>';
+	$statement.= '<b>Input Format</b>';
+	$statement.= '<div class="well well-sm">'.$problemInfo['input_format'].'</div>';
+	$statement.= '<b>Output Format</b>';
+	$statement.= '<div class="well well-sm">'.$problemInfo['output_format'].'</div>';
+	$statement.= '<b>Constraints</b>';
+	$statement.= '<div class="well well-sm">'.$problemInfo['constraints'].'</div>';
+	$statement.= '<table class="table table-condensed table-bordered"><tr><th>Sample Input</th><th>Sample Output</th></tr>';
+	$statement.= '<tr><td><pre style="color:red">'.$problemInfo['sample_input'].'</pre></td><td><pre style="color:red">'.$problemInfo['sample_output'].'</pre></td></tr>';
+	$statement.= '</table>';
+	$statement.= '<b><i>Problem Setter:</i></b>   <i>'.$problemInfo['setter'].'</i><br>';
+	$statement.= '<b><i>Problem Tester:</i></b>   <i>'.$problemInfo['tester'].'</i>';
+	return $statement;
+}
+
 $query = "select value from admin where variable='mode'";
 
 $judge = DB::findOneFromQuery($query);
@@ -295,7 +313,18 @@ if ($judge['value'] != "Lockdown" || (isset($_SESSION['loggedin']) && $_SESSION[
             $prob['languages'] = addslashes($_POST['languages']);
             $prob['displayio'] = addslashes($_POST['displayio']);
             $prob['maxfilesize'] = addslashes($_POST['maxfilesize']);
-            $prob['statement'] = addslashes(file_get_contents($_FILES['statement']['tmp_name']));
+            //info about problem statement
+            $problemStatement = array();
+            $problemStatement['problem_statement'] = addslashes($_POST['problem_statement']);
+            $problemStatement['input_format'] = addslashes($_POST['input_format']);
+            $problemStatement['output_format'] = addslashes($_POST['output_format']);
+            $problemStatement['constraints'] = addslashes($_POST['constraints']);
+            $problemStatement['sample_input'] = addslashes($_POST['sample_input']);
+            $problemStatement['sample_output'] = addslashes($_POST['sample_output']);
+            $problemStatement['setter'] = addslashes($_POST['setter']);
+            $problemStatement['tester'] = addslashes($_POST['tester']);
+            $prob['statement'] = generateProblemStatement($problemStatement);
+            
             $prob['input'] = addslashes(file_get_contents($_FILES['input']['tmp_name']));
             $prob['output'] = addslashes(addslashes(file_get_contents($_FILES['output']['tmp_name'])));
             if ($_FILES['image']['size'] > 0) {
@@ -303,7 +332,7 @@ if ($judge['value'] != "Lockdown" || (isset($_SESSION['loggedin']) && $_SESSION[
             }
             $query = "insert into problems (" . implode(array_keys($prob), ",") . ") values ('" . implode(array_values($prob), "','") . "')";
             DB::query($query);
-            $_SESSION['msg'] = "Problem Added.";
+            $_SESSION['msg'] = 'Problem Added.';
             redirectTo("http://" . $_SERVER['HTTP_HOST'] . $_SESSION['url']);
         } else if (isset($_POST['updateproblem'])) {
             $query = "select * from admin where variable='ip' or variable ='port'";
