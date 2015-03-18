@@ -160,10 +160,9 @@ if (isset($_SESSION['loggedin']) && $_SESSION['team']['status'] == 'Admin') {
                     <textarea class='form-control' name='statement' style='width: 99%; height: 500px;'><?php echo $res['statement']; ?></textarea>
                 </div>
             </div>
-            <div class='col-md-6'>
+            <div class='col-md-12'>
                 <div class='form-group'>
-                    <label class='control-label col-lg-4'></label>
-                    <div class='col-lg-8'>
+                    <div >
                         <input type='submit' class='btn btn-primary btn-large' value='Submit' name='updateproblem' />
                     </div>
                 </div>
@@ -221,7 +220,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['team']['status'] == 'Admin') {
                         </div>
                     </div>
                 </div>
-                <div class='col-md-6'>
+                <!-- <div class='col-md-6'>
                     <div class='form-group'>
                         <label class="control-label col-lg-4" for='statement'>Problem Statement</label>
                         <div class='col-lg-8'>
@@ -229,6 +228,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['team']['status'] == 'Admin') {
                         </div>
                     </div>
                 </div>
+                -->
                 <div class='col-md-6'>
                     <div class='form-group'>
                         <label class="control-label col-lg-4" for='code'>Code</label>
@@ -292,8 +292,8 @@ if (isset($_SESSION['loggedin']) && $_SESSION['team']['status'] == 'Admin') {
                         <label class='control-label col-lg-4' for='contest'>Contest type</label>
                         <div class='col-lg-8'>
                             <select class='form-control' name='contest' id='contest'>
-                                <option value='contest'>Contest</option>
-                                <option selected='selected' value='practice'>Practice</option>
+                                <option selected='selected' value='contest'>Contest</option>
+                                <option  value='practice'>Practice</option>
                             </select>
                         </div>
                     </div>
@@ -354,6 +354,59 @@ if (isset($_SESSION['loggedin']) && $_SESSION['team']['status'] == 'Admin') {
                         </div>
                     </div>
                 </div>
+                <div>
+	                <div class='col-md-12'>
+	                	<b>Problem Statement</b>
+		                <div class='form-group'>
+		                    <textarea class='form-control' name='problem_statement' style='width: 99%; height: 300px;'></textarea>
+		                </div>
+	            	</div>
+	            	<div class='col-md-12'>
+	                	<b>Constraints</b>
+		                <div class='form-group'>
+		                    <textarea class='form-control' name='constraints' style='width: 99%; height: 75px;'></textarea>
+		                </div>
+	            	</div>
+	            	<div class='col-md-6'>
+	                	<b>Input Format</b>
+		                <div class='form-group'>
+		                    <textarea class='form-control' name='input_format' style='width: 99%; height: 150px;'></textarea>
+		                </div>
+	            	</div>
+	            	<div class='col-md-6'>
+	                	<b>Output Format</b>
+		                <div class='form-group'>
+		                    <textarea class='form-control' name='output_format' style='width: 99%; height: 150px;'></textarea>
+		                </div>
+	            	</div>
+	            	<div class='col-md-6'>
+	                	<b>Sample Input</b>
+		                <div class='form-group'>
+		                    <textarea class='form-control' name='sample_input' style='width: 99%; height: 150px;'></textarea>
+		                </div>
+	            	</div>
+	            	<div class='col-md-6'>
+	                	<b>Sample Output</b>
+		                <div class='form-group'>
+		                    <textarea class='form-control' name='sample_output' style='width: 99%; height: 150px;'></textarea>
+		                </div>
+	            	</div>
+	            	<div class='col-md-6'>
+	                	<b>Problem Setter</b>
+		                <div class='form-group'>
+		                    <textarea class='form-control' name='setter' style='width: 99%; height: 40px;'></textarea>
+		                </div>
+	            	</div>
+	            	<div class='col-md-6'>
+	                	<b>Problem Tester</b>
+		                <div class='form-group'>
+		                    <textarea class='form-control' name='tester' style='width: 99%; height: 40px;'></textarea>
+		                </div>
+	            	</div>
+	            </div>
+	            
+	        
+            	
                 <div class='col-md-12'>
                     <div class='form-group'>
                         <label class='control-label col-lg-2'></label>

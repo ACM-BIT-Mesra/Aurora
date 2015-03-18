@@ -12,13 +12,19 @@
         $msg .= "{'title':'$row[title]', 'msg':'$row[msg]'}";
     }
     if(isset($_SESSION['loggedin']) && $_SESSION['team']['status'] == "Admin"){
-        $query = "select time from clar where reply is NULL and access='public' and time > ".$_SESSION['team']['time'];
+    	//fixed bug in case of multiple clarification
+    	//included more info on clarification notification
+        $query = "select * from clar where reply is NULL and access='public' and time > ".$_SESSION['team']['time'];
         $result = DB::findAllFromQuery($query);
-        if($result)
-            if($i != 0)
-                $msg .= ",{'title':'$row[title]', 'msg':'$row[msg]'}";
-            else
-                $msg .= "{'title':'Clarification', 'msg':'New Clarification. Pending Reply!'}";
+        
+        foreach($result as $row) {
+        	if($i != 0)
+        		$msg .= ",";
+        	$i++;
+        	$row['query'] = preg_replace("/\r\n|\r|\n/",'<br/>',$row['query']);
+        	$problemName = DB::findOneFromQuery("SELECT name FROM problems WHERE pid = ".$row['pid']);
+        	$msg .= "{'title':'Clarification for <i>$problemName[name]</i>', 'msg':'$row[query]'}";
+        }
     }
     $msg .= "]}";
     if(isset($_GET['updatetime'])){

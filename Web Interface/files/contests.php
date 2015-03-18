@@ -43,7 +43,9 @@ if ($judge['value'] != "Lockdown" || (isset($_SESSION['loggedin']) && $_SESSION[
                 	echo "<tr><td><a href='" . SITE_URL . "/problems/$row[code]'>$row[name]</a></td><td><a href='" . SITE_URL . "/problems/$row[code]'>$row[score]</a></td><td><a href='" . SITE_URL . "/submit/$row[code]'>$row[code]</a></td><td><a href='" . SITE_URL . "/status/$row[code]'>$row[solved]/$row[total]</a></td></tr>";
             	}
 			}
-            echo "</table><h3>Announcements</h3>$contest[announcement]";
+            echo "</table>";
+            echo "<a class='btn btn-primary' href='" . SITE_URL . "/rank/$_GET[code]'><span class='glyphicon glyphicon-th-list'></span> &nbsp;Rankings</a>";
+            echo "$contest[announcement]";
         } else {
             echo "<br/><br/><br/><div style='padding: 10px;'><h1>Contest not Found :(</h1>The contest you are looking for is not found. Are you on the wrong website?</div><br/><br/><br/>";
         }
