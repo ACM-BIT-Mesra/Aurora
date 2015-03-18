@@ -4,6 +4,9 @@ if [ $1 == "live" ]; then
     DEPPATH=dcadmin@172.16.32.222:/srv/http/aurora
 elif [ $1 == "test" ]; then
     DEPPATH=dcadmin@172.16.32.222:/srv/http/auroraTest
+elif [ $1 == "custom" ];then
+    DEPPATH=$2
+    shift
 else
     echo $ERRORSTRING
     exit 1
